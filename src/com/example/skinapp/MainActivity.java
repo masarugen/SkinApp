@@ -2,7 +2,6 @@
 package com.example.skinapp;
 
 import java.io.File;
-import java.io.IOException;
 
 import android.app.Activity;
 import android.content.Context;
@@ -21,18 +20,35 @@ public class MainActivity extends Activity {
 
         ImageView imageButton1 = (ImageView) findViewById(R.id.imageButton1);
 
-        StorageManager storageManager = new StorageManager(getApplicationContext());
+        // StorageManager storageManager = new
+        // StorageManager(getApplicationContext());
+        // try {
+        // storageManager.copyFiles("");
+        // } catch (IOException e) {
+        // e.printStackTrace();
+        // } finally {
+        // String path = getDir("html", Context.MODE_PRIVATE).getAbsolutePath()
+        // + File.separator
+        // + "aaa" + File.separator + "test.png";
+        // imageButton1.setImageDrawable(Drawable.createFromPath(path));
+        // File file = new File(path);
+        // Log.d("test",
+        // "file:" + file.exists() + ":" + file.getAbsolutePath() + ":"
+        // + file.isDirectory());
+        // }
+        AssetStorage as = new AssetStorage(getApplicationContext(), "html");
         try {
-            storageManager.copyFiles("");
-        } catch (IOException e) {
-            e.printStackTrace();
+            as.copyFiles("", "out");
+        } catch (Exception ex) {
+            ex.printStackTrace();
         } finally {
             String path = getDir("html", Context.MODE_PRIVATE).getAbsolutePath() + File.separator
-                    + "aaa" + File.separator + "test.png";
+                    + "out" + File.separator + "bbb" + File.separator
+                    + "test.png";
             imageButton1.setImageDrawable(Drawable.createFromPath(path));
             File file = new File(path);
             Log.d("test",
-                    "file:" + file.exists() + ":" + file.getAbsolutePath() + ":"
+                    "outfile:" + file.exists() + ":" + file.getAbsolutePath() + ":"
                             + file.isDirectory());
         }
     }
